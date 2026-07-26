@@ -389,7 +389,7 @@ def chapter2(doc):
         "hoa_don: lưu thông tin chung của hóa đơn bán hàng.",
         "chi_tiet_hoa_don: lưu danh sách sản phẩm trong từng hóa đơn.",
     ])
-    para(doc, "So với việc lưu dữ liệu bằng file CSV thuần túy, MySQL có ưu thế hơn về tính toàn vẹn, khả năng truy vấn, khả năng mở rộng và tính đồng bộ khi nhiều nghiệp vụ cùng thao tác trên dữ liệu. Đây là lựa chọn phù hợp cho hệ thống quản lý cửa hàng có dữ liệu phát sinh liên tục.")
+    para(doc, "So với việc quản lý dữ liệu rời rạc bằng sổ sách hoặc bảng tính đơn lẻ, MySQL có ưu thế hơn về tính toàn vẹn, khả năng truy vấn, khả năng mở rộng và tính đồng bộ khi nhiều nghiệp vụ cùng thao tác trên dữ liệu. Đây là lựa chọn phù hợp cho hệ thống quản lý cửa hàng có dữ liệu phát sinh liên tục.")
     para(doc, "Trong phạm vi phiên bản hiện tại, hệ thống tập trung vào quản lý sản phẩm, bán hàng và thống kê doanh thu. Toàn bộ dữ liệu phục vụ các chức năng này được đọc ghi thông qua repository bằng JDBC.")
 
     heading(doc, "2.7. Kiểm tra dữ liệu đầu vào", 2)
