@@ -10,7 +10,7 @@ from docx.shared import Inches, Pt, RGBColor
 
 
 BASE = Path(__file__).resolve().parent
-OUT = BASE / "BaoCao_TechStore_Final_SachChu_AnhThat_MySQL_v2.docx"
+OUT = BASE / "BaoCao_TechStore_Final_KhongNhapHang.docx"
 SCREENS = BASE / "techstore_report_v3_screens"
 MYSQL = BASE / "techstore_report_v3_mysql"
 
@@ -196,7 +196,7 @@ def table_of_contents(doc):
         "2.3. Kiến trúc MVC",
         "2.4. Công nghệ Java",
         "2.5. Java Swing",
-        "2.6. Lưu trữ dữ liệu trong MySQL và nhập dữ liệu từ file TXT/CSV",
+        "2.6. Lưu trữ dữ liệu trong MySQL",
         "2.7. Kiểm tra dữ liệu đầu vào",
         "2.8. Xử lý ngoại lệ",
         "CHƯƠNG 3. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG",
@@ -212,11 +212,11 @@ def chapter1(doc):
     heading(doc, "CHƯƠNG 1. TỔNG QUAN ĐỀ TÀI", 1)
     heading(doc, "1.1. Lý do chọn đề tài", 2)
     para(doc, "Trong hoạt động kinh doanh thiết bị công nghệ, cửa hàng cần quản lý nhiều nhóm sản phẩm như linh kiện máy tính, linh kiện điện thoại và phụ kiện. Mỗi sản phẩm có các thông tin quan trọng như mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng tồn kho và loại sản phẩm. Khi số lượng mặt hàng tăng lên, việc theo dõi thủ công bằng sổ sách hoặc các file rời rạc dễ dẫn đến sai lệch dữ liệu, khó kiểm soát tồn kho và mất nhiều thời gian khi tra cứu.")
-    para(doc, "Bên cạnh việc quản lý sản phẩm, cửa hàng còn phải xử lý nhiều nghiệp vụ phát sinh hằng ngày như bán hàng, lập hóa đơn, nhập hàng và thống kê doanh thu. Các nghiệp vụ này có mối liên hệ trực tiếp với số lượng tồn kho. Nếu dữ liệu không được cập nhật đồng bộ, cửa hàng có thể gặp tình trạng bán vượt số lượng tồn, ghi nhận sai doanh thu hoặc khó xác định lịch sử nhập xuất của từng sản phẩm.")
+    para(doc, "Bên cạnh việc quản lý sản phẩm, cửa hàng còn phải xử lý nhiều nghiệp vụ phát sinh hằng ngày như bán hàng, lập hóa đơn và thống kê doanh thu. Các nghiệp vụ này có mối liên hệ trực tiếp với số lượng tồn kho. Nếu dữ liệu không được cập nhật đồng bộ, cửa hàng có thể gặp tình trạng bán vượt số lượng tồn, ghi nhận sai doanh thu hoặc khó xác định lịch sử bán hàng của từng sản phẩm.")
     para(doc, "Xuất phát từ nhu cầu đó, đề tài \"Hệ thống quản lý cửa hàng TechStore\" được thực hiện nhằm xây dựng một ứng dụng desktop hỗ trợ quản lý các thông tin cơ bản liên quan đến hoạt động của cửa hàng công nghệ. Chương trình được phát triển bằng ngôn ngữ Java, sử dụng Java Swing để xây dựng giao diện người dùng và MySQL để lưu trữ dữ liệu tập trung.")
     para(doc, "Bên cạnh mục tiêu xây dựng một phần mềm có các chức năng quản lý thực tế, đề tài còn được thực hiện nhằm vận dụng các kiến thức của môn Lập trình Hướng đối tượng bằng Java. Trong quá trình xây dựng chương trình, các nguyên lý quan trọng của lập trình hướng đối tượng như tính đóng gói, tính kế thừa, tính đa hình và tính trừu tượng được áp dụng vào việc thiết kế các lớp model và xử lý nghiệp vụ.")
     para(doc, "Ngoài ra, hệ thống được tổ chức theo kiến trúc MVC, kết hợp với Service Layer và Repository. Cách tổ chức này giúp phân chia các thành phần của chương trình theo từng nhiệm vụ riêng biệt: giao diện hiển thị và nhận thao tác người dùng, controller điều phối sự kiện, service xử lý nghiệp vụ, repository làm việc với cơ sở dữ liệu. Nhờ đó, mã nguồn có cấu trúc rõ ràng, dễ quản lý và thuận tiện cho việc phát triển, bảo trì hệ thống.")
-    para(doc, "Vì những lý do trên, nhóm lựa chọn đề tài \"Hệ thống quản lý cửa hàng TechStore\" làm bài tập lớn môn Lập trình Hướng đối tượng. Đề tài vừa phù hợp với kiến thức Java Desktop đã học, vừa có tính ứng dụng thực tế trong bài toán quản lý bán hàng và nhập kho.")
+    para(doc, "Vì những lý do trên, nhóm lựa chọn đề tài \"Hệ thống quản lý cửa hàng TechStore\" làm bài tập lớn môn Lập trình Hướng đối tượng. Đề tài vừa phù hợp với kiến thức Java Desktop đã học, vừa có tính ứng dụng thực tế trong bài toán quản lý sản phẩm, bán hàng và thống kê doanh thu.")
 
     heading(doc, "1.2. Mục tiêu của đề tài", 2)
     para(doc, "Đề tài được thực hiện với mục tiêu xây dựng một phần mềm quản lý cửa hàng có giao diện trực quan, đáp ứng các chức năng quản lý cơ bản và đồng thời thể hiện được việc áp dụng các kiến thức về lập trình hướng đối tượng.")
@@ -229,7 +229,6 @@ def chapter1(doc):
         "Xây dựng chức năng đăng nhập và phân quyền người dùng.",
         "Hỗ trợ quản lý thông tin sản phẩm, bao gồm linh kiện máy tính, linh kiện điện thoại và phụ kiện.",
         "Hỗ trợ lập hóa đơn bán hàng, chọn sản phẩm, kiểm tra số lượng tồn và lưu chi tiết hóa đơn.",
-        "Hỗ trợ nhập hàng từ file TXT/CSV và lưu phiếu nhập vào cơ sở dữ liệu MySQL.",
         "Hỗ trợ thống kê doanh thu, số lượng bán và hóa đơn liên quan theo sản phẩm.",
         "Kiểm tra tính hợp lệ của dữ liệu đầu vào nhằm hạn chế dữ liệu không chính xác.",
         "Xử lý các trường hợp ngoại lệ trong quá trình chương trình hoạt động.",
@@ -243,12 +242,10 @@ def chapter1(doc):
     heading(doc, "1.3.1. Quản lý tài khoản và phân quyền", 3)
     para(doc, "Hệ thống cung cấp chức năng đăng nhập nhằm xác thực người dùng trước khi truy cập vào chương trình. Bên cạnh đó, chương trình hỗ trợ cơ chế phân quyền người dùng với các vai trò được xây dựng trong hệ thống, đồng thời cho phép người dùng sử dụng các chức năng phù hợp với quyền được cấp.")
     heading(doc, "1.3.2. Quản lý sản phẩm", 3)
-    para(doc, "Chức năng quản lý sản phẩm cho phép lưu trữ và quản lý thông tin hàng hóa trong hệ thống. Mỗi sản phẩm có các thông tin như mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng tồn và loại sản phẩm. Dữ liệu sản phẩm được sử dụng để phục vụ bán hàng, nhập hàng và thống kê doanh thu.")
+    para(doc, "Chức năng quản lý sản phẩm cho phép lưu trữ và quản lý thông tin hàng hóa trong hệ thống. Mỗi sản phẩm có các thông tin như mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng tồn và loại sản phẩm. Dữ liệu sản phẩm được sử dụng để phục vụ bán hàng và thống kê doanh thu.")
     heading(doc, "1.3.3. Quản lý hóa đơn", 3)
     para(doc, "Chức năng quản lý hóa đơn hỗ trợ tạo hóa đơn bán hàng, lưu chi tiết sản phẩm đã bán và xem lại thông tin hóa đơn sau khi lưu. Khi lập hóa đơn, hệ thống kiểm tra số lượng tồn kho và tính tổng tiền dựa trên số lượng, đơn giá của từng sản phẩm.")
-    heading(doc, "1.3.4. Quản lý nhập hàng", 3)
-    para(doc, "Hệ thống hỗ trợ import danh sách nhập hàng từ file TXT/CSV, kiểm tra dữ liệu đầu vào và lưu phiếu nhập vào MySQL. Sau khi phiếu nhập được lưu, số lượng tồn kho của các sản phẩm liên quan được cập nhật để bảo đảm dữ liệu kho chính xác.")
-    heading(doc, "1.3.5. Quản lý thống kê", 3)
+    heading(doc, "1.3.4. Quản lý thống kê", 3)
     para(doc, "Chức năng thống kê cho phép theo dõi doanh thu, số lượng bán và hóa đơn liên quan theo từng sản phẩm trong khoảng thời gian lựa chọn. Người dùng có thể lọc dữ liệu theo danh mục sản phẩm, khoảng thời gian và tiêu chí thống kê.")
     para(doc, "Nhìn chung, phạm vi của đề tài tập trung vào việc xây dựng một hệ thống quản lý cửa hàng ở quy mô ứng dụng desktop, sử dụng dữ liệu được lưu trữ tập trung trong MySQL. Đề tài chưa tập trung vào việc triển khai hệ thống trên môi trường web hoặc xây dựng hệ thống bán hàng trực tuyến.")
 
@@ -265,11 +262,10 @@ def chapter1(doc):
         [1, "Đăng nhập và phân quyền", "Xác thực tài khoản và kiểm soát quyền truy cập."],
         [2, "Quản lý sản phẩm", "Quản lý danh sách sản phẩm, thêm mới, sửa thông tin và xóa sản phẩm."],
         [3, "Quản lý hóa đơn", "Lập hóa đơn bán hàng, chọn sản phẩm, nhập số lượng và xem chi tiết hóa đơn."],
-        [4, "Nhập hàng", "Nhập dữ liệu từ file TXT/CSV, tạo phiếu nhập và cập nhật tồn kho trong MySQL."],
-        [5, "Thống kê doanh thu", "Tổng hợp doanh thu, số lượng bán và hóa đơn liên quan theo sản phẩm."],
+        [4, "Thống kê doanh thu", "Tổng hợp doanh thu, số lượng bán và hóa đơn liên quan theo sản phẩm."],
     ], [0.55, 1.75, 4.55])
     para(doc, "Các chức năng trên được phân chia thành các module tương ứng trong chương trình. Về mặt cấu trúc, các module được tổ chức thành các lớp Model để biểu diễn dữ liệu, các lớp Service để xử lý nghiệp vụ, các lớp Repository để truy cập dữ liệu và các lớp View để xây dựng giao diện người dùng.")
-    para(doc, "Theo cấu trúc của dự án, hệ thống có các thành phần chính như SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon, ChiTietHoaDon, PhieuNhap và ChiTietPhieuNhap thuộc tầng Model. Các nghiệp vụ tương ứng được xử lý thông qua các lớp Service như SanPhamService, HoaDonService, PhieuNhapService và ThongKeService. Giao diện người dùng được xây dựng bằng Java Swing với các thành phần như LoginFrame, MainFrame, SanPhamFrame, HoaDonFrame, NhapHangFrame và ThongKeFrame.")
+    para(doc, "Theo cấu trúc của dự án, hệ thống có các thành phần chính như SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon và ChiTietHoaDon thuộc tầng Model. Các nghiệp vụ tương ứng được xử lý thông qua các lớp Service như SanPhamService, HoaDonService và ThongKeService. Giao diện người dùng được xây dựng bằng Java Swing với các thành phần như LoginFrame, MainFrame, SanPhamFrame, HoaDonFrame và ThongKeFrame.")
 
 
 def chapter2(doc):
@@ -278,7 +274,7 @@ def chapter2(doc):
     heading(doc, "2.1.1. Khái niệm lập trình hướng đối tượng", 3)
     para(doc, "Lập trình hướng đối tượng (Object-Oriented Programming - OOP) là phương pháp lập trình tổ chức chương trình xoay quanh các đối tượng và lớp. Trong đó, đối tượng đại diện cho các thực thể trong bài toán, còn lớp là khuôn mẫu dùng để mô tả các thuộc tính và hành vi chung của các đối tượng.")
     para(doc, "Việc áp dụng lập trình hướng đối tượng giúp chương trình có cấu trúc rõ ràng, dễ mở rộng và thuận tiện cho việc bảo trì. Các đối tượng trong hệ thống có thể tương tác với nhau thông qua các phương thức được định nghĩa trong lớp.")
-    para(doc, "Trong đề tài Hệ thống quản lý cửa hàng TechStore, phương pháp lập trình hướng đối tượng được sử dụng để mô hình hóa các đối tượng trong bài toán quản lý như sản phẩm, hóa đơn, chi tiết hóa đơn, phiếu nhập và chi tiết phiếu nhập. Các đối tượng này được biểu diễn thông qua các lớp tương ứng trong package model.")
+    para(doc, "Trong đề tài Hệ thống quản lý cửa hàng TechStore, phương pháp lập trình hướng đối tượng được sử dụng để mô hình hóa các đối tượng trong bài toán quản lý như sản phẩm, hóa đơn và chi tiết hóa đơn. Các đối tượng này được biểu diễn thông qua các lớp tương ứng trong package model.")
     para(doc, "Dự án áp dụng bốn đặc trưng cơ bản của lập trình hướng đối tượng gồm:")
     bullets(doc, [
         "Tính đóng gói (Encapsulation).",
@@ -291,8 +287,8 @@ def chapter2(doc):
     heading(doc, "2.2. Các đặc trưng của lập trình hướng đối tượng được áp dụng trong đề tài", 2)
     heading(doc, "2.2.1. Tính đóng gói (Encapsulation)", 3)
     para(doc, "Tính đóng gói là cơ chế cho phép tập hợp dữ liệu và các phương thức xử lý dữ liệu vào bên trong một lớp, đồng thời hạn chế việc truy cập trực tiếp từ bên ngoài. Trong Java, tính đóng gói thường được thực hiện bằng cách khai báo các thuộc tính với phạm vi truy cập private và cung cấp các phương thức getter, setter để truy cập hoặc thay đổi dữ liệu.")
-    para(doc, "Trong đề tài, các thuộc tính của các lớp Model như SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon, ChiTietHoaDon, PhieuNhap và ChiTietPhieuNhap được đóng gói bên trong các lớp tương ứng. Các thuộc tính được quản lý thông qua các phương thức getter và setter.")
-    para(doc, "Bên cạnh đó, chương trình còn sử dụng các lớp service để kiểm tra tính hợp lệ của dữ liệu đầu vào. Một số dữ liệu được kiểm tra bao gồm mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng, mã hóa đơn, tên khách hàng và mã phiếu nhập. Giá bán và số lượng được kiểm tra ở phạm vi phù hợp với nghiệp vụ bán hàng và nhập kho.")
+    para(doc, "Trong đề tài, các thuộc tính của các lớp Model như SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon và ChiTietHoaDon được đóng gói bên trong các lớp tương ứng. Các thuộc tính được quản lý thông qua các phương thức getter và setter.")
+    para(doc, "Bên cạnh đó, chương trình còn sử dụng các lớp service để kiểm tra tính hợp lệ của dữ liệu đầu vào. Một số dữ liệu được kiểm tra bao gồm mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng, mã hóa đơn và tên khách hàng. Giá bán và số lượng được kiểm tra ở phạm vi phù hợp với nghiệp vụ bán hàng.")
     para(doc, "Việc áp dụng tính đóng gói giúp hạn chế việc thay đổi dữ liệu không hợp lệ từ bên ngoài đối tượng, đồng thời nâng cao tính an toàn và khả năng kiểm soát dữ liệu của hệ thống.")
 
     heading(doc, "2.2.2. Tính kế thừa (Inheritance)", 3)
@@ -306,7 +302,7 @@ def chapter2(doc):
     heading(doc, "2.2.3. Tính đa hình (Polymorphism)", 3)
     para(doc, "Tính đa hình cho phép cùng một phương thức hoặc giao diện có thể được triển khai theo những cách khác nhau tùy thuộc vào đối tượng cụ thể.")
     para(doc, "Trong đề tài, tính đa hình được thể hiện thông qua việc các lớp con của SanPham có thể được xử lý dưới dạng kiểu SanPham trong service, controller và repository. Nhờ vậy, chương trình có thể quản lý nhiều loại sản phẩm theo một cấu trúc chung nhưng vẫn giữ được đặc điểm riêng của từng loại sản phẩm.")
-    para(doc, "Ngoài ra, các phương thức xử lý trong từng service như thêm sản phẩm, tạo hóa đơn, tạo phiếu nhập và thống kê doanh thu cũng thể hiện cách tổ chức nghiệp vụ theo các luồng xử lý chung. Controller chỉ cần gọi service tương ứng, còn chi tiết xử lý được đóng gói bên trong từng lớp nghiệp vụ.")
+    para(doc, "Ngoài ra, các phương thức xử lý trong từng service như thêm sản phẩm, tạo hóa đơn và thống kê doanh thu cũng thể hiện cách tổ chức nghiệp vụ theo các luồng xử lý chung. Controller chỉ cần gọi service tương ứng, còn chi tiết xử lý được đóng gói bên trong từng lớp nghiệp vụ.")
 
     heading(doc, "2.2.4. Tính trừu tượng (Abstraction)", 3)
     para(doc, "Tính trừu tượng cho phép tập trung vào những đặc điểm và hành vi quan trọng của đối tượng, đồng thời ẩn đi các chi tiết triển khai không cần thiết đối với bên ngoài.")
@@ -327,14 +323,13 @@ def chapter2(doc):
     para(doc, "Việc phân chia chương trình theo mô hình MVC giúp tách biệt phần giao diện với phần xử lý nghiệp vụ và dữ liệu. Nhờ đó, việc phát triển và bảo trì hệ thống trở nên thuận tiện hơn.")
     heading(doc, "2.3.2. Áp dụng MVC trong đề tài", 3)
     para(doc, "Trong phần mềm quản lý cửa hàng TechStore, kiến trúc chương trình được tổ chức theo hướng MVC kết hợp với Service Layer và Repository.")
-    para(doc, "Package model chứa các lớp đại diện cho các đối tượng dữ liệu của hệ thống, bao gồm SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon, ChiTietHoaDon, PhieuNhap và ChiTietPhieuNhap.")
+    para(doc, "Package model chứa các lớp đại diện cho các đối tượng dữ liệu của hệ thống, bao gồm SanPham, LinhKienPC, LinhKienDienThoai, PhuKien, HoaDon và ChiTietHoaDon.")
     para(doc, "Package view chứa các thành phần giao diện được xây dựng bằng Java Swing, bao gồm:")
     bullets(doc, [
         "LoginFrame.",
         "MainFrame.",
         "SanPhamFrame.",
         "HoaDonFrame.",
-        "NhapHangFrame.",
         "ThongKeFrame.",
     ])
     para(doc, "Các thành phần này chịu trách nhiệm hiển thị thông tin và cung cấp giao diện để người dùng tương tác với hệ thống.")
@@ -344,17 +339,15 @@ def chapter2(doc):
         "MainController.",
         "SanPhamController.",
         "HoaDonController.",
-        "NhapHangController.",
         "ThongKeController.",
     ])
     para(doc, "Các lớp controller đóng vai trò điều phối luồng xử lý giữa giao diện và tầng nghiệp vụ.")
-    para(doc, "Package service đóng vai trò xử lý nghiệp vụ trung gian giữa controller và repository. Đây là nơi kiểm tra dữ liệu, tính toán các giá trị nghiệp vụ như tổng tiền hóa đơn, cập nhật tồn kho sau nhập hàng, kiểm tra tính hợp lệ của dữ liệu trước khi ghi xuống cơ sở dữ liệu và tổng hợp số liệu thống kê.")
+    para(doc, "Package service đóng vai trò xử lý nghiệp vụ trung gian giữa controller và repository. Đây là nơi kiểm tra dữ liệu, tính toán các giá trị nghiệp vụ như tổng tiền hóa đơn, kiểm tra số lượng tồn kho trước khi bán, kiểm tra tính hợp lệ của dữ liệu trước khi ghi xuống cơ sở dữ liệu và tổng hợp số liệu thống kê.")
     para(doc, "Trong dự án, phần xử lý nghiệp vụ được tách thành các lớp service tương ứng với từng nhóm chức năng:")
     bullets(doc, [
         "AuthService.",
         "SanPhamService.",
         "HoaDonService.",
-        "PhieuNhapService.",
         "ThongKeService.",
     ])
     para(doc, "Package repository chứa các lớp truy cập dữ liệu, có nhiệm vụ làm việc trực tiếp với MySQL thông qua JDBC. Cấu trúc này giúp các tầng trong hệ thống tách biệt và dễ mở rộng.")
@@ -370,9 +363,8 @@ def chapter2(doc):
         "Xây dựng các lớp Service.",
         "Xây dựng các lớp Repository truy cập MySQL.",
         "Xử lý và kiểm tra dữ liệu.",
-        "Đọc dữ liệu nhập hàng từ file TXT/CSV.",
         "Xây dựng giao diện ứng dụng bằng Java Swing.",
-        "Xử lý các nghiệp vụ quản lý sản phẩm, hóa đơn, nhập hàng và thống kê.",
+        "Xử lý các nghiệp vụ quản lý sản phẩm, hóa đơn và thống kê.",
     ])
     para(doc, "Việc sử dụng Java giúp đề tài có thể vận dụng trực tiếp các kiến thức trọng tâm của môn Lập trình Hướng đối tượng vào một ứng dụng thực tế.")
     heading(doc, "2.5. Java Swing", 2)
@@ -383,36 +375,30 @@ def chapter2(doc):
         "MainFrame: cửa sổ menu chính của chương trình.",
         "SanPhamFrame: giao diện quản lý sản phẩm.",
         "HoaDonFrame: giao diện quản lý hóa đơn.",
-        "NhapHangFrame: giao diện nhập hàng từ file TXT/CSV.",
         "ThongKeFrame: giao diện thống kê doanh thu.",
     ])
     para(doc, "Ngoài ra, các hộp thoại như SanPhamDialog, HoaDonDialog, ChonSanPhamDialog, ChiTietHoaDonDialog và HoaDonLienQuanDialog được sử dụng để hỗ trợ thao tác nhập liệu và xem chi tiết dữ liệu.")
 
-    heading(doc, "2.6. Lưu trữ dữ liệu trong MySQL và nhập dữ liệu từ file TXT/CSV", 2)
-    para(doc, "Trong đề tài, dữ liệu được lưu trữ tập trung trong MySQL. Cơ sở dữ liệu techstore_db là nơi lưu toàn bộ thông tin quan trọng của hệ thống như tài khoản người dùng, sản phẩm, hóa đơn, chi tiết hóa đơn, phiếu nhập và chi tiết phiếu nhập.")
-    para(doc, "Việc sử dụng MySQL giúp hệ thống bảo đảm dữ liệu được quản lý tập trung, dễ truy vấn, dễ đồng bộ và phù hợp với các nghiệp vụ có liên hệ chặt chẽ như bán hàng và nhập kho. Khi tạo hóa đơn hoặc phiếu nhập, dữ liệu chi tiết được lưu vào các bảng liên quan và số lượng tồn kho được cập nhật theo nghiệp vụ.")
+    heading(doc, "2.6. Lưu trữ dữ liệu trong MySQL", 2)
+    para(doc, "Trong đề tài, dữ liệu được lưu trữ tập trung trong MySQL. Cơ sở dữ liệu techstore_db là nơi lưu toàn bộ thông tin quan trọng của hệ thống như tài khoản người dùng, sản phẩm, hóa đơn và chi tiết hóa đơn.")
+    para(doc, "Việc sử dụng MySQL giúp hệ thống bảo đảm dữ liệu được quản lý tập trung, dễ truy vấn, dễ đồng bộ và phù hợp với các nghiệp vụ có liên hệ chặt chẽ như quản lý sản phẩm và bán hàng. Khi tạo hóa đơn, dữ liệu chi tiết được lưu vào các bảng liên quan và số lượng tồn kho được cập nhật theo nghiệp vụ bán hàng.")
     para(doc, "Các bảng dữ liệu chính trong hệ thống bao gồm:")
     bullets(doc, [
         "user: lưu tài khoản đăng nhập và vai trò người dùng.",
         "san_pham: lưu danh sách sản phẩm, giá bán, tồn kho và loại sản phẩm.",
         "hoa_don: lưu thông tin chung của hóa đơn bán hàng.",
         "chi_tiet_hoa_don: lưu danh sách sản phẩm trong từng hóa đơn.",
-        "phieu_nhap: lưu thông tin chung của phiếu nhập hàng.",
-        "chi_tiet_phieu_nhap: lưu danh sách sản phẩm trong từng phiếu nhập.",
     ])
-    para(doc, "Bên cạnh việc lưu trữ trong MySQL, hệ thống còn hỗ trợ nhập dữ liệu từ file TXT hoặc CSV ở chức năng nhập hàng. File nhập hàng thường gồm mã sản phẩm và số lượng nhập, được đọc vào giao diện để người dùng kiểm tra trước khi lưu thành phiếu nhập.")
-    para(doc, "Điểm quan trọng là file TXT/CSV không phải nơi lưu trữ chính của hệ thống. File chỉ đóng vai trò nguồn dữ liệu đầu vào giúp người dùng nạp nhanh danh sách hàng cần nhập. Sau khi dữ liệu trong file được đọc và kiểm tra hợp lệ, chương trình sẽ tạo phiếu nhập, lưu chi tiết phiếu nhập vào MySQL và cập nhật số lượng tồn kho trong bảng san_pham.")
-    para(doc, "Cách làm này kết hợp ưu điểm của hai phương thức: MySQL đóng vai trò lưu trữ chính và bảo đảm dữ liệu dài hạn, còn TXT/CSV đóng vai trò nguồn nhập nhanh cho nghiệp vụ nhận hàng. Nhờ vậy, người dùng có thể chuẩn bị danh sách nhập hàng bằng file bên ngoài rồi đưa vào hệ thống một cách thuận tiện.")
-    para(doc, "So với việc lưu dữ liệu bằng file CSV thuần túy, MySQL có ưu thế hơn về tính toàn vẹn, khả năng truy vấn, khả năng mở rộng và tính đồng bộ khi nhiều nghiệp vụ cùng thao tác trên dữ liệu. Đây là lựa chọn phù hợp hơn cho hệ thống quản lý cửa hàng có dữ liệu phát sinh liên tục.")
-    para(doc, "Trong hướng phát triển của đề tài, việc nhập từ file TXT/CSV vẫn được duy trì như một kênh nạp dữ liệu đầu vào, nhưng dữ liệu sau cùng luôn được ghi xuống MySQL để phục vụ các chức năng bán hàng, thống kê và tra cứu.")
+    para(doc, "So với việc lưu dữ liệu bằng file CSV thuần túy, MySQL có ưu thế hơn về tính toàn vẹn, khả năng truy vấn, khả năng mở rộng và tính đồng bộ khi nhiều nghiệp vụ cùng thao tác trên dữ liệu. Đây là lựa chọn phù hợp cho hệ thống quản lý cửa hàng có dữ liệu phát sinh liên tục.")
+    para(doc, "Trong phạm vi phiên bản hiện tại, hệ thống tập trung vào quản lý sản phẩm, bán hàng và thống kê doanh thu. Toàn bộ dữ liệu phục vụ các chức năng này được đọc ghi thông qua repository bằng JDBC.")
 
     heading(doc, "2.7. Kiểm tra dữ liệu đầu vào", 2)
     para(doc, "Trong quá trình nhập dữ liệu, việc kiểm tra tính hợp lệ là một yếu tố quan trọng nhằm hạn chế dữ liệu sai hoặc không đầy đủ. Hệ thống xây dựng các lớp service để kiểm tra dữ liệu đầu vào trước khi lưu vào MySQL.")
-    para(doc, "Một số thông tin được kiểm tra bao gồm mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng, mã hóa đơn, tên khách hàng và các dòng dữ liệu trong file TXT/CSV.")
-    para(doc, "Đối với dữ liệu giá bán và số lượng, hệ thống kiểm tra để bảo đảm giá trị hợp lệ và phù hợp với nghiệp vụ. Với file TXT/CSV, hệ thống cũng kiểm tra định dạng từng dòng để tránh ghi nhận các bản ghi lỗi vào cơ sở dữ liệu.")
+    para(doc, "Một số thông tin được kiểm tra bao gồm mã sản phẩm, tên sản phẩm, hãng sản xuất, giá bán, số lượng, mã hóa đơn và tên khách hàng.")
+    para(doc, "Đối với dữ liệu giá bán và số lượng, hệ thống kiểm tra để bảo đảm giá trị hợp lệ và phù hợp với nghiệp vụ bán hàng.")
     heading(doc, "2.8. Xử lý ngoại lệ", 2)
     para(doc, "Ngoại lệ là những tình huống bất thường có thể xảy ra trong quá trình chương trình hoạt động. Nếu không được xử lý phù hợp, các lỗi này có thể khiến chương trình dừng đột ngột hoặc gây ảnh hưởng đến trải nghiệm người dùng.")
-    para(doc, "Trong đề tài, hệ thống xử lý các trường hợp như dữ liệu đầu vào không hợp lệ, mã sản phẩm hoặc hóa đơn trùng, thiếu kết nối MySQL hoặc lỗi thao tác file TXT/CSV bằng cách hiển thị thông báo rõ ràng cho người dùng và tránh làm gián đoạn chương trình.")
+    para(doc, "Trong đề tài, hệ thống xử lý các trường hợp như dữ liệu đầu vào không hợp lệ, mã sản phẩm hoặc hóa đơn trùng, không đủ số lượng tồn kho hoặc thiếu kết nối MySQL bằng cách hiển thị thông báo rõ ràng cho người dùng và tránh làm gián đoạn chương trình.")
     para(doc, "Việc kiểm soát ngoại lệ giúp ứng dụng ổn định hơn trong quá trình sử dụng thực tế, đồng thời hỗ trợ người dùng nhận biết lỗi và thao tác lại đúng cách.")
 
 
@@ -424,14 +410,13 @@ def chapter3(doc):
         ["Đăng nhập", "Kiểm tra tài khoản, mật khẩu trong bảng user trước khi mở menu chính."],
         ["Sản phẩm", "Hiển thị, thêm, sửa, xóa sản phẩm và phân loại sản phẩm."],
         ["Hóa đơn", "Tạo hóa đơn, chọn sản phẩm, kiểm tra số lượng tồn và lưu chi tiết hóa đơn."],
-        ["Nhập hàng", "Đọc file nhập hàng, hiển thị danh sách và tạo phiếu nhập."],
         ["Thống kê", "Tính doanh thu, số lượng bán và xem hóa đơn liên quan."],
     ], [1.75, 4.95])
     heading(doc, "3.2. Yêu cầu phi chức năng", 2)
     bullets(doc, [
         "Giao diện cần dễ nhìn, thao tác đơn giản và phản hồi lỗi rõ ràng.",
         "Dữ liệu đầu vào phải được kiểm tra để hạn chế lỗi khi lưu vào cơ sở dữ liệu.",
-        "Các thao tác tạo hóa đơn và nhập hàng cần bảo đảm cập nhật dữ liệu nhất quán.",
+        "Các thao tác tạo hóa đơn cần bảo đảm cập nhật dữ liệu nhất quán.",
         "Mã nguồn cần chia package rõ ràng để dễ bảo trì và mở rộng.",
     ])
     heading(doc, "3.3. Thiết kế package", 2)
@@ -445,7 +430,7 @@ def chapter3(doc):
         ["com.techstore.exception", "Chứa ngoại lệ tùy chỉnh TechStoreException."],
     ], [2.15, 4.55])
     heading(doc, "3.4. Thiết kế lớp model", 2)
-    para(doc, "Lớp SanPham đóng vai trò lớp cơ sở trừu tượng cho các loại sản phẩm. Các lớp LinhKienPC, LinhKienDienThoai và PhuKien kế thừa từ SanPham. Hóa đơn và phiếu nhập được biểu diễn bằng cặp lớp thông tin chung và chi tiết.")
+    para(doc, "Lớp SanPham đóng vai trò lớp cơ sở trừu tượng cho các loại sản phẩm. Các lớp LinhKienPC, LinhKienDienThoai và PhuKien kế thừa từ SanPham. Hóa đơn được biểu diễn bằng cặp lớp thông tin chung và chi tiết.")
     table(doc, ["Lớp", "Vai trò"], [
         ["SanPham", "Lớp trừu tượng chứa thông tin chung của sản phẩm."],
         ["LinhKienPC", "Đại diện sản phẩm thuộc nhóm linh kiện máy tính."],
@@ -453,18 +438,14 @@ def chapter3(doc):
         ["PhuKien", "Đại diện sản phẩm phụ kiện."],
         ["HoaDon", "Thông tin hóa đơn bán hàng và danh sách chi tiết."],
         ["ChiTietHoaDon", "Một dòng sản phẩm trong hóa đơn."],
-        ["PhieuNhap", "Thông tin phiếu nhập hàng và danh sách chi tiết."],
-        ["ChiTietPhieuNhap", "Một dòng sản phẩm nhập kho."],
     ], [2.1, 4.6])
     heading(doc, "3.5. Thiết kế cơ sở dữ liệu", 2)
-    para(doc, "Cơ sở dữ liệu techstore_db gồm các bảng chính: user, san_pham, hoa_don, chi_tiet_hoa_don, phieu_nhap và chi_tiet_phieu_nhap. Các bảng chi tiết liên kết với bảng nghiệp vụ thông qua mã hóa đơn hoặc mã phiếu nhập, đồng thời liên kết với sản phẩm qua mã sản phẩm.")
+    para(doc, "Cơ sở dữ liệu techstore_db gồm các bảng chính: user, san_pham, hoa_don và chi_tiet_hoa_don. Bảng chi tiết hóa đơn liên kết với bảng hóa đơn thông qua mã hóa đơn, đồng thời liên kết với sản phẩm qua mã sản phẩm.")
     table(doc, ["Bảng", "Nội dung"], [
         ["user", "Tài khoản đăng nhập và vai trò người dùng."],
         ["san_pham", "Danh sách sản phẩm, giá bán, tồn kho và loại sản phẩm."],
         ["hoa_don", "Thông tin chung của hóa đơn bán hàng."],
         ["chi_tiet_hoa_don", "Danh sách sản phẩm trong từng hóa đơn."],
-        ["phieu_nhap", "Thông tin chung của phiếu nhập hàng."],
-        ["chi_tiet_phieu_nhap", "Danh sách sản phẩm trong từng phiếu nhập."],
     ], [2.05, 4.65])
     heading(doc, "3.6. Luồng xử lý tiêu biểu", 2)
     numbers(doc, [
@@ -482,7 +463,7 @@ def chapter4(doc):
     para(doc, "Chương này trình bày từng chức năng của hệ thống kèm ảnh chụp thật từ ứng dụng Java Swing đang chạy. Ảnh được chụp ở độ phân giải cao để khi đưa vào Word không bị vỡ hoặc quá mờ.")
     items = [
         ("4.1. Đăng nhập hệ thống", "Màn hình đăng nhập yêu cầu người dùng nhập tên đăng nhập và mật khẩu. Controller kiểm tra dữ liệu trong bảng user trước khi cho phép truy cập.", ["Mở chương trình Java.", "Nhập tên đăng nhập và mật khẩu.", "Nhấn Đăng nhập để vào menu chính."], "01_dang_nhap.png", "Hình 4.1. Màn hình đăng nhập"),
-        ("4.2. Menu chính", "Sau khi đăng nhập thành công, người dùng được chuyển đến menu chính. Menu này là điểm điều hướng đến các phân hệ sản phẩm, hóa đơn, nhập hàng và thống kê.", ["Chọn Quản lý sản phẩm để quản lý danh mục hàng hóa.", "Chọn Quản lý hóa đơn để lập và xem hóa đơn bán hàng.", "Chọn Nhập hàng để import file nhập kho.", "Chọn Thống kê doanh thu để xem kết quả kinh doanh."], "02_menu_chinh.png", "Hình 4.2. Menu chính"),
+        ("4.2. Menu chính", "Sau khi đăng nhập thành công, người dùng được chuyển đến menu chính. Menu này là điểm điều hướng đến các phân hệ sản phẩm, hóa đơn và thống kê.", ["Chọn Quản lý sản phẩm để quản lý danh mục hàng hóa.", "Chọn Quản lý hóa đơn để lập và xem hóa đơn bán hàng.", "Chọn Thống kê doanh thu để xem kết quả kinh doanh."], "02_menu_chinh.png", "Hình 4.2. Menu chính"),
         ("4.3. Danh sách sản phẩm", "Màn hình quản lý sản phẩm hiển thị dữ liệu thật từ bảng san_pham trong MySQL.", ["Mở chức năng Quản lý sản phẩm.", "Quan sát danh sách sản phẩm đang có trong cơ sở dữ liệu.", "Chọn cột thao tác để sửa hoặc xóa sản phẩm."], "03_san_pham_danh_sach.png", "Hình 4.3. Danh sách sản phẩm lấy từ MySQL"),
         ("4.4. Thêm sản phẩm", "Form thêm sản phẩm mới cho phép nhập mã sản phẩm, tên, hãng sản xuất, giá bán, số lượng và loại sản phẩm.", ["Nhấn nút Thêm Sản Phẩm Mới.", "Nhập đầy đủ các trường bắt buộc.", "Nhấn Lưu để thêm sản phẩm."], "04_san_pham_them_moi.png", "Hình 4.4. Form thêm sản phẩm mới"),
         ("4.5. Sửa sản phẩm", "Chức năng sửa sản phẩm dùng lại form sản phẩm nhưng khóa mã sản phẩm vì đây là khóa định danh.", ["Chọn một sản phẩm trong bảng.", "Mở menu thao tác và chọn Sửa.", "Cập nhật tên, hãng, giá bán hoặc số lượng.", "Nhấn Lưu để cập nhật dữ liệu."], "05_san_pham_sua.png", "Hình 4.5. Form sửa thông tin sản phẩm"),
@@ -493,10 +474,8 @@ def chapter4(doc):
         ("4.10. Chọn sản phẩm cho hóa đơn", "Dialog chọn sản phẩm hỗ trợ tìm kiếm theo tên hoặc mã sản phẩm và lọc theo danh mục.", ["Nhấn Thêm Sản Phẩm trong form hóa đơn.", "Tìm kiếm hoặc lọc danh mục.", "Chọn một sản phẩm trong bảng.", "Nhập số lượng muốn mua."], "10_hoa_don_chon_san_pham.png", "Hình 4.10. Dialog tìm kiếm và chọn sản phẩm"),
         ("4.11. Xem chi tiết hóa đơn", "Chi tiết hóa đơn hiển thị thông tin khách hàng, ngày tạo, danh sách sản phẩm, số lượng, đơn giá, thành tiền và tổng tiền.", ["Chọn hóa đơn trong danh sách.", "Mở menu thao tác.", "Chọn Xem Chi Tiết Hóa Đơn."], "11_hoa_don_chi_tiet.png", "Hình 4.11. Dialog xem chi tiết hóa đơn"),
         ("4.12. Menu thao tác hóa đơn", "Menu thao tác hóa đơn cho phép xem chi tiết hoặc xóa hóa đơn.", ["Chọn dòng hóa đơn.", "Nhấn cột thao tác.", "Chọn Xem Chi Tiết hoặc Xóa Hóa Đơn."], "12_hoa_don_menu_thao_tac.png", "Hình 4.12. Menu thao tác hóa đơn"),
-        ("4.13. Nhập hàng từ file", "Chức năng nhập hàng đọc file TXT/CSV, mỗi dòng gồm mã sản phẩm và số lượng nhập.", ["Chọn File Nhập Hàng.", "Kiểm tra danh sách được nạp lên bảng.", "Nhấn Lưu Vào CSDL nếu dữ liệu đúng."], "13_nhap_hang_import.png", "Hình 4.13. Danh sách nhập hàng sau khi import"),
-        ("4.14. Xác nhận lưu phiếu nhập", "Trước khi lưu phiếu nhập, hệ thống yêu cầu xác nhận. Khi đồng ý, repository tạo phiếu nhập, lưu chi tiết phiếu nhập và cập nhật số lượng tồn kho.", ["Kiểm tra số dòng nhập hàng.", "Nhấn Lưu Vào CSDL.", "Xác nhận lưu dữ liệu."], "14_nhap_hang_xac_nhan.png", "Hình 4.14. Xác nhận lưu phiếu nhập"),
-        ("4.15. Thống kê doanh thu", "Màn hình thống kê tổng hợp số lượng bán và doanh thu theo sản phẩm.", ["Mở Thống Kê Doanh Thu.", "Chọn danh mục hoặc khoảng thời gian.", "Chọn thống kê theo doanh thu hoặc số lượng bán.", "Nhấn Lọc Dữ Liệu để cập nhật kết quả."], "15_thong_ke_doanh_thu.png", "Hình 4.15. Màn hình thống kê doanh thu"),
-        ("4.16. Hóa đơn liên quan trong thống kê", "Khi chọn một sản phẩm trong bảng thống kê, người dùng có thể xem danh sách hóa đơn đã mua sản phẩm đó.", ["Chọn sản phẩm trong bảng thống kê.", "Nhấn Xem Hóa Đơn Liên Quan.", "Quan sát các hóa đơn và tổng số lượng bán."], "16_thong_ke_hoa_don_lien_quan.png", "Hình 4.16. Danh sách hóa đơn liên quan"),
+        ("4.13. Thống kê doanh thu", "Màn hình thống kê tổng hợp số lượng bán và doanh thu theo sản phẩm.", ["Mở Thống Kê Doanh Thu.", "Chọn danh mục hoặc khoảng thời gian.", "Chọn thống kê theo doanh thu hoặc số lượng bán.", "Nhấn Lọc Dữ Liệu để cập nhật kết quả."], "15_thong_ke_doanh_thu.png", "Hình 4.13. Màn hình thống kê doanh thu"),
+        ("4.14. Hóa đơn liên quan trong thống kê", "Khi chọn một sản phẩm trong bảng thống kê, người dùng có thể xem danh sách hóa đơn đã mua sản phẩm đó.", ["Chọn sản phẩm trong bảng thống kê.", "Nhấn Xem Hóa Đơn Liên Quan.", "Quan sát các hóa đơn và tổng số lượng bán."], "16_thong_ke_hoa_don_lien_quan.png", "Hình 4.14. Danh sách hóa đơn liên quan"),
     ]
     for title, desc, steps, image, cap in items:
         heading(doc, title, 2)
@@ -515,8 +494,6 @@ def chapter5(doc):
         ("03_mysql_san_pham.png", "Hình 5.3. Dữ liệu bảng san_pham"),
         ("04_mysql_hoa_don.png", "Hình 5.4. Dữ liệu bảng hoa_don"),
         ("05_mysql_chi_tiet_hoa_don.png", "Hình 5.5. Dữ liệu bảng chi_tiet_hoa_don"),
-        ("06_mysql_phieu_nhap.png", "Hình 5.6. Dữ liệu bảng phieu_nhap"),
-        ("07_mysql_chi_tiet_phieu_nhap.png", "Hình 5.7. Dữ liệu bảng chi_tiet_phieu_nhap"),
     ]:
         figure(doc, MYSQL / name, cap, width=6.75)
 
@@ -527,7 +504,7 @@ def chapter6(doc):
     bullets(doc, [
         "Xây dựng được ứng dụng desktop quản lý cửa hàng TechStore bằng Java Swing.",
         "Kết nối và sử dụng MySQL để lưu trữ dữ liệu thật của hệ thống.",
-        "Hoàn thiện các chức năng đăng nhập, quản lý sản phẩm, hóa đơn, nhập hàng và thống kê.",
+        "Hoàn thiện các chức năng đăng nhập, quản lý sản phẩm, hóa đơn và thống kê.",
         "Tổ chức mã nguồn theo các tầng model, view, controller, service và repository.",
         "Áp dụng các đặc trưng lập trình hướng đối tượng trong thiết kế lớp và xử lý nghiệp vụ.",
     ])
