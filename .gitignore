@@ -39,6 +39,7 @@ build/
 ### Local/generated ###
 *.class
 cp.txt
+reports/
 reports/workbench_screen.png
 reports/BaoCao_TechStore_DayDu_34Trang_AnhThat_MySQL*.docx
 reports/BaoCao_TechStore_LamLai_CoAnhThat_MySQL.docx
