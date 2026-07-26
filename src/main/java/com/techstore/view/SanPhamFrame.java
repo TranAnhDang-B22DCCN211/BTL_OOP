@@ -7,7 +7,6 @@ import java.awt.*;
 public class SanPhamFrame extends JFrame {
     private final JTable tblSanPham;
     private final DefaultTableModel tableModel;
-    private final JButton btnThemMoi;
     private JButton btnQuayLai;
     private final JPopupMenu popupMenu;
     private final JMenuItem itemSua;
@@ -21,10 +20,6 @@ public class SanPhamFrame extends JFrame {
         setLayout(new BorderLayout(10, 10));
 
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        btnThemMoi = new JButton("Thêm Sản Phẩm Mới");
-        btnThemMoi.setBackground(new Color(40, 167, 69));
-        btnThemMoi.setForeground(Color.WHITE);
-        topPanel.add(btnThemMoi);
         add(topPanel, BorderLayout.NORTH);
 
         String[] columns = { "Mã SP", "Tên SP", "Hãng SX", "Giá Bán", "Số Lượng", "Loại", "Thao tác" };
@@ -58,10 +53,6 @@ public class SanPhamFrame extends JFrame {
 
     public JTable getTblSanPham() {
         return tblSanPham;
-    }
-
-    public JButton getBtnThemMoi() {
-        return btnThemMoi;
     }
 
     public JButton getBtnQuayLai() {

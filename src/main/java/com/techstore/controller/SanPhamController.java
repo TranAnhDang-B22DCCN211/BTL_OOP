@@ -3,7 +3,6 @@ package com.techstore.controller;
 import com.techstore.exception.TechStoreException;
 import com.techstore.model.SanPham;
 import com.techstore.service.SanPhamService;
-import com.techstore.util.SanPhamFactory;
 import com.techstore.view.MainFrame;
 import com.techstore.view.SanPhamDialog;
 import com.techstore.view.SanPhamFrame;
@@ -26,58 +25,6 @@ public class SanPhamController {
     }
 
     private void initController() {
-        view.getBtnThemMoi().addActionListener(e -> {
-            SanPhamDialog dialog = new SanPhamDialog(view, "Thêm Sản Phẩm Mới");
-
-            dialog.getBtnLuu().addActionListener(event -> {
-                try {
-                    String maSp = dialog.getTxtMaSp().getText().trim();
-                    String tenSp = dialog.getTxtTenSp().getText().trim();
-                    String hangSx = dialog.getTxtHangSx().getText().trim();
-                    String giaBanStr = dialog.getTxtGiaBan().getText().trim();
-                    String soLuongStr = dialog.getTxtSoLuong().getText().trim();
-                    String loaiSp = dialog.getCboLoaiSp().getSelectedItem().toString();
-
-                    if (maSp.isEmpty() || tenSp.isEmpty() || hangSx.isEmpty() || giaBanStr.isEmpty()
-                            || soLuongStr.isEmpty()) {
-                        JOptionPane.showMessageDialog(dialog, "Vui lòng nhập đầy đủ thông tin!");
-                        return;
-                    }
-
-                    double giaBan = Double.parseDouble(giaBanStr);
-                    int soLuong = Integer.parseInt(soLuongStr);
-                    SanPham spMoi = taoSanPhamTheoLoai(loaiSp);
-
-                    if (spMoi == null) {
-                        JOptionPane.showMessageDialog(dialog, "Loại sản phẩm không hợp lệ!");
-                        return;
-                    }
-
-                    spMoi.setMaSanPham(maSp);
-                    spMoi.setTenSanPham(tenSp);
-                    spMoi.setHangSanXuat(hangSx);
-                    spMoi.setGiaBan(giaBan);
-                    spMoi.setSoLuongTon(soLuong);
-
-                    if (sanPhamService.themSanPham(spMoi)) {
-                        JOptionPane.showMessageDialog(dialog, "Thêm sản phẩm thành công!");
-                        dialog.dispose();
-                        loadData();
-                    } else {
-                        JOptionPane.showMessageDialog(dialog, "Lỗi: Mã sản phẩm có thể đã tồn tại!");
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(dialog, "Giá bán và Số lượng phải là số hợp lệ!");
-                } catch (TechStoreException ex) {
-                    JOptionPane.showMessageDialog(dialog, ex.getMessage());
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dialog, "Có lỗi xảy ra: " + ex.getMessage());
-                }
-            });
-
-            dialog.setVisible(true);
-        });
-
         view.getTblSanPham().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -248,12 +195,4 @@ public class SanPhamController {
         }
     }
 
-    private SanPham taoSanPhamTheoLoai(String loaiSp) {
-        return switch (loaiSp) {
-            case "Điện Thoại" -> SanPhamFactory.taoSanPham(SanPhamFactory.LOAI_DIEN_THOAI);
-            case "Linh Kiện PC" -> SanPhamFactory.taoSanPham(SanPhamFactory.LOAI_PC);
-            case "Phụ Kiện" -> SanPhamFactory.taoSanPham(SanPhamFactory.LOAI_PHU_KIEN);
-            default -> null;
-        };
-    }
 }
