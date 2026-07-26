@@ -1,5 +1,6 @@
 package com.techstore.repository;
 
+import com.techstore.exception.DatabaseException;
 import com.techstore.model.SanPham;
 import com.techstore.util.SanPhamFactory;
 import java.sql.Connection;
@@ -29,8 +30,7 @@ public class SanPhamRepository implements BaseRepository<SanPham> {
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể thêm sản phẩm vào MySQL!", e);
         }
     }
 
@@ -48,8 +48,7 @@ public class SanPhamRepository implements BaseRepository<SanPham> {
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể cập nhật sản phẩm trong MySQL!", e);
         }
     }
 
@@ -62,8 +61,7 @@ public class SanPhamRepository implements BaseRepository<SanPham> {
             pstmt.setString(1, id);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể xóa sản phẩm khỏi MySQL!", e);
         }
     }
 
@@ -89,7 +87,7 @@ public class SanPhamRepository implements BaseRepository<SanPham> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseException("Không thể lấy danh sách sản phẩm từ MySQL!", e);
         }
         return danhSach;
     }
@@ -117,7 +115,7 @@ public class SanPhamRepository implements BaseRepository<SanPham> {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseException("Không thể tìm sản phẩm trong MySQL!", e);
         }
         return null;
     }

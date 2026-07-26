@@ -1,5 +1,6 @@
 package com.techstore.repository;
 
+import com.techstore.exception.UserException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class UserRepository {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new UserException("Không thể kiểm tra thông tin đăng nhập trong MySQL!", e);
         }
         return null;
     }

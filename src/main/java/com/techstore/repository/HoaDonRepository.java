@@ -1,5 +1,6 @@
 package com.techstore.repository;
 
+import com.techstore.exception.DatabaseException;
 import com.techstore.model.ChiTietHoaDon;
 import com.techstore.model.HoaDon;
 
@@ -58,18 +59,17 @@ public class HoaDonRepository implements BaseRepository<HoaDon> {
                 try {
                     conn.rollback();
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    throw new DatabaseException("Không thể rollback giao dịch tạo hóa đơn!", ex);
                 }
             }
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể lưu hóa đơn vào MySQL!", e);
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    throw new DatabaseException("Không thể đóng kết nối MySQL sau khi tạo hóa đơn!", e);
                 }
             }
         }
@@ -87,8 +87,7 @@ public class HoaDonRepository implements BaseRepository<HoaDon> {
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể cập nhật hóa đơn trong MySQL!", e);
         }
     }
 
@@ -119,18 +118,17 @@ public class HoaDonRepository implements BaseRepository<HoaDon> {
                 try {
                     conn.rollback();
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    throw new DatabaseException("Không thể rollback giao dịch xóa hóa đơn!", ex);
                 }
             }
-            e.printStackTrace();
-            return false;
+            throw new DatabaseException("Không thể xóa hóa đơn khỏi MySQL!", e);
         } finally {
             if (conn != null) {
                 try {
                     conn.setAutoCommit(true);
                     conn.close();
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    throw new DatabaseException("Không thể đóng kết nối MySQL sau khi xóa hóa đơn!", e);
                 }
             }
         }
@@ -152,7 +150,7 @@ public class HoaDonRepository implements BaseRepository<HoaDon> {
                 danhSach.add(hd);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseException("Không thể lấy danh sách hóa đơn từ MySQL!", e);
         }
         return danhSach;
     }
@@ -193,7 +191,7 @@ public class HoaDonRepository implements BaseRepository<HoaDon> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DatabaseException("Không thể lấy chi tiết hóa đơn từ MySQL!", e);
         }
         return hd;
     }

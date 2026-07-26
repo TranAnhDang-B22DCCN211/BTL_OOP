@@ -1,5 +1,6 @@
 package com.techstore.controller;
 
+import com.techstore.exception.TechStoreException;
 import com.techstore.repository.UserRepository;
 import com.techstore.view.LoginFrame;
 import com.techstore.view.MainFrame;
@@ -29,14 +30,18 @@ public class LoginController {
                 return;
             }
 
-            String role = repo.kiemTraDangNhap(user, pass);
-            if (role != null) {
-                view.dispose();
-                MainFrame mainFrame = new MainFrame();
-                new MainController(mainFrame);
-                mainFrame.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(view, "Sai tên đăng nhập hoặc mật khẩu!");
+            try {
+                String role = repo.kiemTraDangNhap(user, pass);
+                if (role != null) {
+                    view.dispose();
+                    MainFrame mainFrame = new MainFrame();
+                    new MainController(mainFrame);
+                    mainFrame.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(view, "Sai tên đăng nhập hoặc mật khẩu!");
+                }
+            } catch (TechStoreException ex) {
+                JOptionPane.showMessageDialog(view, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
