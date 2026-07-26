@@ -1,0 +1,53 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.kotlin
+
+### IntelliJ IDEA ###
+.idea/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Local/generated ###
+*.class
+cp.txt
+reports/workbench_screen.png
+reports/BaoCao_TechStore_DayDu_34Trang_AnhThat_MySQL*.docx
+reports/BaoCao_TechStore_LamLai_CoAnhThat_MySQL.docx
+reports/BaoCao_TechStore_Final_SachChu_AnhThat_MySQL.docx
+reports/CaptureTechStoreReportV2.java
+reports/generate_techstore_report_v2.py
+reports/generate_techstore_report_v3_long.py
+reports/techstore_report_v2_mysql/
+reports/techstore_report_v2_screens/
+
+### Mac OS ###
+.DS_Store
