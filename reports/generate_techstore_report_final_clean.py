@@ -85,9 +85,45 @@ def bullets(doc, items):
         set_run(r)
 
 
+def _next_numbering_id(doc):
+    numbering = doc.part.numbering_part.element
+    ids = [int(num.get(qn("w:numId"))) for num in numbering.findall(qn("w:num")) if num.get(qn("w:numId"))]
+    return max(ids, default=0) + 1
+
+
+def _set_numbering(paragraph, num_id, ilvl=0):
+    pPr = paragraph._p.get_or_add_pPr()
+    numPr = pPr.find(qn("w:numPr"))
+    if numPr is None:
+        numPr = OxmlElement("w:numPr")
+        pPr.append(numPr)
+
+    ilvl_el = numPr.find(qn("w:ilvl"))
+    if ilvl_el is None:
+        ilvl_el = OxmlElement("w:ilvl")
+        numPr.append(ilvl_el)
+    ilvl_el.set(qn("w:val"), str(ilvl))
+
+    numId_el = numPr.find(qn("w:numId"))
+    if numId_el is None:
+        numId_el = OxmlElement("w:numId")
+        numPr.append(numId_el)
+    numId_el.set(qn("w:val"), str(num_id))
+
+
 def numbers(doc, items):
+    num_id = _next_numbering_id(doc)
+    numbering = doc.part.numbering_part.element
+    abstract = OxmlElement("w:num")
+    abstract.set(qn("w:numId"), str(num_id))
+    abs_id = OxmlElement("w:abstractNumId")
+    abs_id.set(qn("w:val"), "0")
+    abstract.append(abs_id)
+    numbering.append(abstract)
+
     for item in items:
-        p = doc.add_paragraph(style="List Number")
+        p = doc.add_paragraph()
+        _set_numbering(p, num_id, 0)
         p.paragraph_format.space_after = Pt(3)
         r = p.add_run(item)
         set_run(r)
@@ -465,17 +501,16 @@ def chapter4(doc):
         ("4.1. Đăng nhập hệ thống", "Màn hình đăng nhập yêu cầu người dùng nhập tên đăng nhập và mật khẩu. Controller kiểm tra dữ liệu trong bảng user trước khi cho phép truy cập.", ["Mở chương trình Java.", "Nhập tên đăng nhập và mật khẩu.", "Nhấn Đăng nhập để vào menu chính."], "01_dang_nhap.png", "Hình 4.1. Màn hình đăng nhập"),
         ("4.2. Menu chính", "Sau khi đăng nhập thành công, người dùng được chuyển đến menu chính. Menu này là điểm điều hướng đến các phân hệ sản phẩm, hóa đơn và thống kê.", ["Chọn Quản lý sản phẩm để quản lý danh mục hàng hóa.", "Chọn Quản lý hóa đơn để lập và xem hóa đơn bán hàng.", "Chọn Thống kê doanh thu để xem kết quả kinh doanh."], "02_menu_chinh.png", "Hình 4.2. Menu chính"),
         ("4.3. Danh sách sản phẩm", "Màn hình quản lý sản phẩm hiển thị dữ liệu thật từ bảng san_pham trong MySQL.", ["Mở chức năng Quản lý sản phẩm.", "Quan sát danh sách sản phẩm đang có trong cơ sở dữ liệu.", "Chọn cột thao tác để sửa hoặc xóa sản phẩm."], "03_san_pham_danh_sach.png", "Hình 4.3. Danh sách sản phẩm lấy từ MySQL"),
-        ("4.4. Thêm sản phẩm", "Form thêm sản phẩm mới cho phép nhập mã sản phẩm, tên, hãng sản xuất, giá bán, số lượng và loại sản phẩm.", ["Nhấn nút Thêm Sản Phẩm Mới.", "Nhập đầy đủ các trường bắt buộc.", "Nhấn Lưu để thêm sản phẩm."], "04_san_pham_them_moi.png", "Hình 4.4. Form thêm sản phẩm mới"),
-        ("4.5. Sửa sản phẩm", "Chức năng sửa sản phẩm dùng lại form sản phẩm nhưng khóa mã sản phẩm vì đây là khóa định danh.", ["Chọn một sản phẩm trong bảng.", "Mở menu thao tác và chọn Sửa.", "Cập nhật tên, hãng, giá bán hoặc số lượng.", "Nhấn Lưu để cập nhật dữ liệu."], "05_san_pham_sua.png", "Hình 4.5. Form sửa thông tin sản phẩm"),
-        ("4.6. Xóa sản phẩm", "Trước khi xóa, hệ thống hiển thị hộp thoại xác nhận để tránh thao tác nhầm.", ["Chọn sản phẩm cần xóa.", "Chọn thao tác Xóa.", "Đọc thông tin xác nhận.", "Chọn Yes để xóa hoặc No để hủy."], "06_san_pham_xoa.png", "Hình 4.6. Hộp thoại xác nhận xóa sản phẩm"),
-        ("4.7. Menu thao tác sản phẩm", "Menu thao tác trên bảng giúp giao diện gọn hơn. Các lệnh sửa và xóa xuất hiện khi người dùng chọn dòng sản phẩm.", ["Chọn một dòng trong bảng sản phẩm.", "Nhấn vào cột thao tác.", "Chọn Sửa Sản Phẩm hoặc Xóa Sản Phẩm."], "07_san_pham_menu_thao_tac.png", "Hình 4.7. Menu thao tác trong màn hình sản phẩm"),
-        ("4.8. Danh sách hóa đơn", "Màn hình hóa đơn hiển thị các hóa đơn đã lưu trong bảng hoa_don.", ["Mở chức năng Quản lý hóa đơn.", "Quan sát danh sách hóa đơn.", "Chọn thao tác để xem chi tiết hoặc xóa hóa đơn."], "08_hoa_don_danh_sach.png", "Hình 4.8. Danh sách hóa đơn"),
-        ("4.9. Tạo hóa đơn bán hàng", "Form tạo hóa đơn cho phép nhập khách hàng, ngày tạo và danh sách sản phẩm trong giỏ hàng.", ["Nhấn Thêm Hóa Đơn Mới.", "Nhập tên khách hàng.", "Thêm sản phẩm vào giỏ hàng.", "Kiểm tra tổng tiền và nhấn Lưu."], "09_hoa_don_tao_moi.png", "Hình 4.9. Form tạo hóa đơn bán hàng"),
-        ("4.10. Chọn sản phẩm cho hóa đơn", "Dialog chọn sản phẩm hỗ trợ tìm kiếm theo tên hoặc mã sản phẩm và lọc theo danh mục.", ["Nhấn Thêm Sản Phẩm trong form hóa đơn.", "Tìm kiếm hoặc lọc danh mục.", "Chọn một sản phẩm trong bảng.", "Nhập số lượng muốn mua."], "10_hoa_don_chon_san_pham.png", "Hình 4.10. Dialog tìm kiếm và chọn sản phẩm"),
-        ("4.11. Xem chi tiết hóa đơn", "Chi tiết hóa đơn hiển thị thông tin khách hàng, ngày tạo, danh sách sản phẩm, số lượng, đơn giá, thành tiền và tổng tiền.", ["Chọn hóa đơn trong danh sách.", "Mở menu thao tác.", "Chọn Xem Chi Tiết Hóa Đơn."], "11_hoa_don_chi_tiet.png", "Hình 4.11. Dialog xem chi tiết hóa đơn"),
-        ("4.12. Menu thao tác hóa đơn", "Menu thao tác hóa đơn cho phép xem chi tiết hoặc xóa hóa đơn.", ["Chọn dòng hóa đơn.", "Nhấn cột thao tác.", "Chọn Xem Chi Tiết hoặc Xóa Hóa Đơn."], "12_hoa_don_menu_thao_tac.png", "Hình 4.12. Menu thao tác hóa đơn"),
-        ("4.13. Thống kê doanh thu", "Màn hình thống kê tổng hợp số lượng bán và doanh thu theo sản phẩm.", ["Mở Thống Kê Doanh Thu.", "Chọn danh mục hoặc khoảng thời gian.", "Chọn thống kê theo doanh thu hoặc số lượng bán.", "Nhấn Lọc Dữ Liệu để cập nhật kết quả."], "15_thong_ke_doanh_thu.png", "Hình 4.13. Màn hình thống kê doanh thu"),
-        ("4.14. Hóa đơn liên quan trong thống kê", "Khi chọn một sản phẩm trong bảng thống kê, người dùng có thể xem danh sách hóa đơn đã mua sản phẩm đó.", ["Chọn sản phẩm trong bảng thống kê.", "Nhấn Xem Hóa Đơn Liên Quan.", "Quan sát các hóa đơn và tổng số lượng bán."], "16_thong_ke_hoa_don_lien_quan.png", "Hình 4.14. Danh sách hóa đơn liên quan"),
+        ("4.4. Sửa sản phẩm", "Chức năng sửa sản phẩm dùng lại form sản phẩm nhưng khóa mã sản phẩm vì đây là khóa định danh.", ["Chọn một sản phẩm trong bảng.", "Mở menu thao tác và chọn Sửa.", "Cập nhật tên, hãng, giá bán hoặc số lượng.", "Nhấn Lưu để cập nhật dữ liệu."], "05_san_pham_sua.png", "Hình 4.4. Form sửa thông tin sản phẩm"),
+        ("4.5. Xóa sản phẩm", "Trước khi xóa, hệ thống hiển thị hộp thoại xác nhận để tránh thao tác nhầm.", ["Chọn sản phẩm cần xóa.", "Chọn thao tác Xóa.", "Đọc thông tin xác nhận.", "Chọn Yes để xóa hoặc No để hủy."], "06_san_pham_xoa.png", "Hình 4.5. Hộp thoại xác nhận xóa sản phẩm"),
+        ("4.6. Menu thao tác sản phẩm", "Menu thao tác trên bảng giúp giao diện gọn hơn. Các lệnh sửa và xóa xuất hiện khi người dùng chọn dòng sản phẩm.", ["Chọn một dòng trong bảng sản phẩm.", "Nhấn vào cột thao tác.", "Chọn Sửa Sản Phẩm hoặc Xóa Sản Phẩm."], "07_san_pham_menu_thao_tac.png", "Hình 4.6. Menu thao tác trong màn hình sản phẩm"),
+        ("4.7. Danh sách hóa đơn", "Màn hình hóa đơn hiển thị các hóa đơn đã lưu trong bảng hoa_don.", ["Mở chức năng Quản lý hóa đơn.", "Quan sát danh sách hóa đơn.", "Chọn thao tác để xem chi tiết hoặc xóa hóa đơn."], "08_hoa_don_danh_sach.png", "Hình 4.7. Danh sách hóa đơn"),
+        ("4.8. Tạo hóa đơn bán hàng", "Form tạo hóa đơn cho phép nhập khách hàng, ngày tạo và danh sách sản phẩm trong giỏ hàng.", ["Nhấn Thêm Hóa Đơn Mới.", "Nhập tên khách hàng.", "Thêm sản phẩm vào giỏ hàng.", "Kiểm tra tổng tiền và nhấn Lưu."], "09_hoa_don_tao_moi.png", "Hình 4.8. Form tạo hóa đơn bán hàng"),
+        ("4.9. Chọn sản phẩm cho hóa đơn", "Dialog chọn sản phẩm hỗ trợ tìm kiếm theo tên hoặc mã sản phẩm và lọc theo danh mục.", ["Nhấn Thêm Sản Phẩm trong form hóa đơn.", "Tìm kiếm hoặc lọc danh mục.", "Chọn một sản phẩm trong bảng.", "Nhập số lượng muốn mua."], "10_hoa_don_chon_san_pham.png", "Hình 4.9. Dialog tìm kiếm và chọn sản phẩm"),
+        ("4.10. Xem chi tiết hóa đơn", "Chi tiết hóa đơn hiển thị thông tin khách hàng, ngày tạo, danh sách sản phẩm, số lượng, đơn giá, thành tiền và tổng tiền.", ["Chọn hóa đơn trong danh sách.", "Mở menu thao tác.", "Chọn Xem Chi Tiết Hóa Đơn."], "11_hoa_don_chi_tiet.png", "Hình 4.10. Dialog xem chi tiết hóa đơn"),
+        ("4.11. Menu thao tác hóa đơn", "Menu thao tác hóa đơn cho phép xem chi tiết hoặc xóa hóa đơn.", ["Chọn dòng hóa đơn.", "Nhấn cột thao tác.", "Chọn Xem Chi Tiết hoặc Xóa Hóa Đơn."], "12_hoa_don_menu_thao_tac.png", "Hình 4.11. Menu thao tác hóa đơn"),
+        ("4.12. Thống kê doanh thu", "Màn hình thống kê tổng hợp số lượng bán và doanh thu theo sản phẩm.", ["Mở Thống Kê Doanh Thu.", "Chọn danh mục hoặc khoảng thời gian.", "Chọn thống kê theo doanh thu hoặc số lượng bán.", "Nhấn Lọc Dữ Liệu để cập nhật kết quả."], "15_thong_ke_doanh_thu.png", "Hình 4.12. Màn hình thống kê doanh thu"),
+        ("4.13. Hóa đơn liên quan trong thống kê", "Khi chọn một sản phẩm trong bảng thống kê, người dùng có thể xem danh sách hóa đơn đã mua sản phẩm đó.", ["Chọn sản phẩm trong bảng thống kê.", "Nhấn Xem Hóa Đơn Liên Quan.", "Quan sát các hóa đơn và tổng số lượng bán."], "16_thong_ke_hoa_don_lien_quan.png", "Hình 4.13. Danh sách hóa đơn liên quan"),
     ]
     for title, desc, steps, image, cap in items:
         heading(doc, title, 2)
